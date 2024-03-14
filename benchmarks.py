@@ -12,3 +12,8 @@ def eval_pol(n, x):
             su = pol[j] + su * x
         pu = pu + su
     return pu
+
+def python_float_ten_thousand(benchmark):
+    result = benchmark(eval_pol, 10000, 0.2)
+
+    assert result == 25000
