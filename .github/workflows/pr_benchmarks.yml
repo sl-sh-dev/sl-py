@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "0 10 * * 4"
 
 jobs:
   benchmark_pr_with_bencher:
@@ -21,9 +23,6 @@ jobs:
       - name: Track Benchmarks with Bencher
         run: |
           bencher run --file results.json \
-          --if-branch "$GITHUB_REF_NAME" \
-          --else-if-branch "$GITHUB_BASE_REF" \
-          --else-if-branch main \
           --github-actions "${{ secrets.GITHUB_TOKEN }}" \
           --token "${{ secrets.BENCHER_API_TOKEN }}" \
           --err \
