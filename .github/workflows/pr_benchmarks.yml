@@ -1,0 +1,30 @@
+name: Bencher
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  benchmark_pr_with_bencher:
+    name: Continuous Benchmarking with Bencher
+    runs-on: ubuntu-latest
+    env:
+      BENCHER_PROJECT: sl-sh
+      BENCHER_TESTBED: ubuntu-latest
+      BENCHER_ADAPTER: python_pytest
+    steps:
+      - run: sudo apt-get update
+      - run: sudo apt install -y pipenv
+      - uses: actions/checkout@v4
+      - uses: bencherdev/bencher@main
+      - name: Track Benchmarks with Bencher
+        run: |
+          bencher run --file results.json \
+          --if-branch "$GITHUB_REF_NAME" \
+          --else-if-branch "$GITHUB_BASE_REF" \
+          --else-if-branch main \
+          --github-actions "${{ secrets.GITHUB_TOKEN }}" \
+          --token "${{ secrets.BENCHER_API_TOKEN }}" \
+          --err \
+          "pipenv run pytest --benchmark-json results.json benchmarks.py"
