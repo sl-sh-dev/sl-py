@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BENCHER_PROJECT: sl-sh
-      BENCHER_TESTBED: ubuntu-latest
+      BENCHER_TESTBED: ubuntu-latest-python
       BENCHER_ADAPTER: python_pytest
     steps:
       - run: sudo apt-get update
