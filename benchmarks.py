@@ -1,19 +1,20 @@
-def eval_pol(n, x):
-    su = 0.0
-    mu = 10.0
-    pu = 0.0
-    pol = [0.0] * 100
-    for _ in range(n):
-        su = 0.0
-        for j in range(100):
-            mu = (mu + 2.0) / 2.0
-            pol[j] = mu
-        for j in range(100):
-            su = pol[j] + su * x
-        pu = pu + su
-    return pu
+from eval_pol import eval_pol
+import pytest
 
-def python_float_ten_thousand(benchmark):
+@pytest.mark.benchmark
+def test_python_float_one_hundred(benchmark):
+    result = benchmark(eval_pol, 100, 0.5)
+
+    assert result == 400
+
+@pytest.mark.benchmark
+def test_python_float_one_thousand(benchmark):
+    result = benchmark(eval_pol, 1000, 0.05)
+
+    assert result == 2105.263157894749
+
+@pytest.mark.benchmark
+def test_python_float_ten_thousand(benchmark):
     result = benchmark(eval_pol, 10000, 0.2)
 
     assert result == 25000
