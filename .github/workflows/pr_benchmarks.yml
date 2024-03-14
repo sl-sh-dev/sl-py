@@ -18,6 +18,7 @@ jobs:
     steps:
       - run: sudo apt-get update
       - run: sudo apt install -y pipenv
+      - run: sudo pip3 install pytest pytest-benchmark
       - uses: actions/checkout@v4
       - uses: bencherdev/bencher@main
       - name: Track Benchmarks with Bencher
