@@ -8,6 +8,8 @@ pytest-benchmark = "*"
 pytest = "*"
 
 [dev-packages]
+pytest-benchmark = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.10"
