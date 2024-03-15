@@ -18,3 +18,9 @@ def test_python_float_ten_thousand(benchmark):
     result = benchmark(eval_pol, 10000, 0.2)
 
     assert result == 25000
+
+@pytest.mark.benchmark
+def test_python_float_fifty_thousand(benchmark):
+    result = benchmark(eval_pol, 50000, 0.2)
+
+    assert result == 125000
