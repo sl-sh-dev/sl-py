@@ -7,6 +7,7 @@ on:
   schedule:
     - cron: "0 10 * * 4"
 
+
 jobs:
   benchmark_pr_with_bencher:
     name: Continuous Benchmarking with Bencher
@@ -17,8 +18,8 @@ jobs:
       BENCHER_ADAPTER: python_pytest
     steps:
       - run: sudo apt-get update
-      - run: sudo apt install -y pipenv
-      - run: sudo pip3 install pytest pytest-benchmark
+      - run: sudo apt install -y python3-pip
+      - run: sudo pip3 install pipenv
       - uses: actions/checkout@v4
       - uses: bencherdev/bencher@main
       - name: Track Benchmarks with Bencher
@@ -27,4 +28,4 @@ jobs:
           --github-actions "${{ secrets.GITHUB_TOKEN }}" \
           --token "${{ secrets.BENCHER_API_TOKEN }}" \
           --err \
-          "pytest --benchmark-json results.json benchmarks.py"
+          "pipenv run pytest --benchmark-json results.json benchmarks.py"
