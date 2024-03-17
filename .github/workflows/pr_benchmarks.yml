@@ -22,6 +22,8 @@ jobs:
       - run: sudo pip3 install pipenv
       - uses: actions/checkout@v4
       - uses: bencherdev/bencher@main
+      - name: Install requirements
+        run: pipenv install
       - name: Track Benchmarks with Bencher
         run: |
           bencher run --file results.json \
