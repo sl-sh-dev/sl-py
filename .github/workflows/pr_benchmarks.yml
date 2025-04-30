@@ -22,7 +22,7 @@ jobs:
       BENCHER_ADAPTER: python_pytest
     steps:
       - run: sudo apt-get update
-      - run: sudo apt install -y python3-pip
+      - run: sudo apt install -y python3-pip python3
       - run: sudo pip3 install pipenv
       - uses: actions/checkout@v4
       - uses: bencherdev/bencher@main
